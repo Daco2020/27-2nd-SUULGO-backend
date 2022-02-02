@@ -30,5 +30,5 @@ Django, Python, MySQL, jwt, bcrypt, AWS(EC2, RDS), Git, Notion(kanban)
 
 <br />
 
-## [리펙토링]
+# :: Refactoring ::
 - 2022.2.2 : 매칭알고리즘을 평균 가중치가 아닌 개인별 가중치로 로직 변경
