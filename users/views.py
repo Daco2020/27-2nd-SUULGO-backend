@@ -211,7 +211,6 @@ class MatchingListView(View):
             user_alcohol_categories = user.alcohol_categories.all()
             user_flavors            = user.flavors.all()
             user_weight             = get_user_weight(user)
-            print(f"결과 : {user_weight}")
 
             matching_list_dict  = {}
             for opponent in opponents:
