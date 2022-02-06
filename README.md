@@ -2,7 +2,7 @@
 - 술고 = "코딩하다 지친 당신... 술GO?"라는 컨셉의 위코더 매칭(위코드 내 커뮤니티, 매칭서비스, 약속잡기 등) 서비스
 - 실제 유저들을 가입시켜 정상적으로 서비스가 동작하는 것을 확인하였습니다.
 - 개발은 초기 세팅부터 직접 구현했으며 MVP를 따라 최소 이용가능한 제품단위로 개발을 진행하였습니다.
-- [술고 사이트 시현영상](https://www.youtube.com/watch?v=AnpIbkjwnLs&feature=youtu.be)
+- [술고 사이트 시영상](https://www.youtube.com/watch?v=AnpIbkjwnLs&feature=youtu.be)
 
 ## [팀 소개]
 ### Front-end
