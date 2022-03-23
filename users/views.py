@@ -91,7 +91,7 @@ class UserView(View):
     def get(self, request, user_id):
         try:
             opponent                = Survey.objects.get(user=user_id)
-            user_survey             = Survey.objects.get(user=request.user)
+            user_survey             = Survey.objects.get(user=request.user) 
             user_drinking_methods   = user_survey.drinking_methods.all()
             user_alcohol_categories = user_survey.alcohol_categories.all()
             user_flavors            = user_survey.flavors.all()
@@ -205,8 +205,12 @@ class MatchingListView(View):
     @authorization
     def get(self, request):
         try:
-            opponents               = Survey.objects.exclude(user = request.user) 
-            user                    = Survey.objects.get(user = request.user)
+            opponents               = Survey.objects.select_related().prefetch_related(
+                                                                        'drinking_methods',
+                                                                        'alcohol_categories', 
+                                                                        'flavors'
+                                                                        ).exclude(user = request.user)
+            user                    = Survey.objects.select_related().get(user = request.user)
             user_drinking_methods   = user.drinking_methods.all()
             user_alcohol_categories = user.alcohol_categories.all()
             user_flavors            = user.flavors.all()
@@ -220,23 +224,26 @@ class MatchingListView(View):
                 opponent_alcohol_categories = opponent.alcohol_categories.all()
                 opponent_flavors            = opponent.flavors.all()
 
-                matching_point  += point_calculator(opponent_drinking_methods, user_drinking_methods, user_weight['drinking_method_weight'])
-                matching_point  += point_calculator(opponent_alcohol_categories, user_alcohol_categories, user_weight['alcohol_category_weight'])
-                matching_point  += point_calculator(opponent_flavors, user_flavors, user_weight['flavor_weight'])
-                matching_point  += int(opponent.alcohol_limit == user.alcohol_limit) * user_weight['alcohol_limit_weight']
-                matching_point  += int(opponent.alcohol_level == user.alcohol_level) * user_weight['alcohol_level_weight']
+                matching_point += point_calculator(opponent_drinking_methods, user_drinking_methods, user_weight['drinking_method_weight'])
+                matching_point += point_calculator(opponent_alcohol_categories, user_alcohol_categories, user_weight['alcohol_category_weight'])
+                matching_point += point_calculator(opponent_flavors, user_flavors, user_weight['flavor_weight'])
+                matching_point += int(opponent.alcohol_limit == user.alcohol_limit) * user_weight['alcohol_limit_weight']
+                matching_point += int(opponent.alcohol_level == user.alcohol_level) * user_weight['alcohol_level_weight']
 
                 matching_list_dict[opponent.id] = int(matching_point)
 
             sorted_matching_list = sorted(matching_list_dict.items(), key=lambda x: x[1], reverse = True)
             
-            result = [{
-                'matching_point'    : sorted_opponent[1],
-                'id'                : Survey.objects.get(id=sorted_opponent[0]).user.id,
-                'name'              : Survey.objects.get(id=sorted_opponent[0]).user.name,
-                'class_number'      : Survey.objects.get(id=sorted_opponent[0]).class_number,
-                'profile_image_url' : Survey.objects.get(id=sorted_opponent[0]).user.profile_image_url
-            } for sorted_opponent in sorted_matching_list[:9]] 
+            result = []
+            for sorted_opponent in sorted_matching_list[:9]:
+                matching_opponent = Survey.objects.select_related('user').get(id=sorted_opponent[0])
+                result.append({
+                    'matching_point'    : sorted_opponent[1],
+                    'id'                : matching_opponent.user.id,
+                    'name'              : matching_opponent.user.name,
+                    'class_number'      : matching_opponent.class_number,
+                    'profile_image_url' : matching_opponent.user.profile_image_url
+                })
 
             return JsonResponse({ "result" : result }, status=200)
 
