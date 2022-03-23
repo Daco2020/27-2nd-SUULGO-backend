@@ -22,7 +22,8 @@
 Django, Python, MySQL, jwt, bcrypt, AWS(EC2, RDS), Git, Notion(kanban)
 
 ### ERD
-<img width="1018" src="https://user-images.githubusercontent.com/92412962/147327052-61887084-fbcc-4f9e-b9f1-2305610e0ef1.png">
+![suulgo2](https://user-images.githubusercontent.com/76890895/159702344-ea64fae8-6284-4226-9566-445aaf849972.png)
+
 
 ## Reference
 - [API Document](https://documenter.getpostman.com/view/18513651/UVRAK7eQ#c2444f8b-25dd-4a80-b8f0-9ff4873558f8)
@@ -32,7 +33,7 @@ Django, Python, MySQL, jwt, bcrypt, AWS(EC2, RDS), Git, Notion(kanban)
 <br />
 
 # :: Refactoring ::
-- 2022.3.23 : MatchingListView 쿼리 최적화 (기존 쿼리 157개 -> 최적화 후 17개)
-- 2022.2.2  : 매칭알고리즘을 평균 가중치가 아닌 개인별 가중치로 로직 변경
-- 2022.1.   : 유저가 자기 자신에게 약속을 요청 할 수 있는 버그 수정
-- 2022.1.   : 알람 확인 시, 약속 날짜를 확인할 수 있도록 날짜 키-값 추가
+- 220323 : MatchingListView 쿼리 최적화 (기존 쿼리 157개 -> 최적화 후 17개)
+- 220202 : 매칭알고리즘을 평균 가중치가 아닌 개인별 가중치로 로직 변경
+- 220108 : 유저가 자기 자신에게 약속을 요청 할 수 있는 버그 수정
+- 220108 : 알람 확인 시, 약속 날짜를 확인할 수 있도록 날짜 키-값 추가
