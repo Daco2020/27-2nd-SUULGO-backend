@@ -33,7 +33,7 @@ Django, Python, MySQL, jwt, bcrypt, AWS(EC2, RDS), Git, Notion(kanban)
 <br />
 
 # :: Refactoring ::
-- 220323 : MatchingListView 쿼리 최적화 (기존 쿼리 157개 -> 최적화 후 17개)
+- 220323 : MatchingListView 쿼리 최적화(쿼리 89% 감소)
 - 220202 : 매칭알고리즘을 평균 가중치가 아닌 개인별 가중치로 로직 변경
 - 220108 : 유저가 자기 자신에게 약속을 요청 할 수 있는 버그 수정
 - 220108 : 알람 확인 시, 약속 날짜를 확인할 수 있도록 날짜 키-값 추가
